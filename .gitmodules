@@ -1,0 +1,9 @@
+[submodule "deckjs"]
+	path = deckjs
+	url = https://github.com/imakewebthings/deck.js.git
+[submodule "launchpad"]
+	path = launchpad
+	url = https://github.com/FluidInc/deck.js-themes.git
+[submodule "markdown2deckjs"]
+	path = markdown2deckjs
+	url = https://github.com/ulf/markdown2deckjs.git
