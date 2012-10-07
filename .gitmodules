@@ -7,3 +7,6 @@
 [submodule "markdown2deckjs"]
 	path = markdown2deckjs
 	url = https://github.com/ulf/markdown2deckjs.git
+[submodule "extensions/remote"]
+	path = extensions/remote
+	url = git://github.com/seppo0010/deck.remote.js.git
