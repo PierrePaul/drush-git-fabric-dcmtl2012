@@ -35,28 +35,42 @@
     <img class="pheromone-logo" src="images/pheromone.png" alt="Pheromone logo"/>
 <div class="slide" id="1"><h1>Déploiement de niveau entreprise avec Git, Drush et Fabric</h1>
 </div><div class="slide" id="2"><h2>Drush</h2>
+<p><img alt="Swiss Arny Knife" src="images/presentation-drush/knife.jpg" /></p>
 </div><div class="slide" id="3"><h2>Drush?</h2>
-<p><img alt="Broken Window" src="/images/presentation-drush/window-1.jpg" /></p>
+<p><img alt="Broken Window" src="images/presentation-drush/window-1.jpg" /></p>
 </div><div class="slide" id="4"><h2>Drush!</h2>
-<p><img alt="Clean Window" src="/images/presentation-drush/window-2.jpg" /></p>
+<p><img alt="Clean Window" src="images/presentation-drush/window-2.jpg" /></p>
 </div><div class="slide" id="5"><h2>Fonctions de Drush</h2>
 <ul>
 <li>Télécharger des modules</li>
 <li>Activer/Désactiver des modules</li>
 <li>Déinstaller des modules</li>
 <li>Rouler les tests*</li>
+<li>Vider les cache</li>
+<li>Cron</li>
+<li>Gérer les utilisateurs</li>
+<li>Récupérer et changer les valeurs des variables de configuration</li>
+<li>...</li>
 </ul>
-</div><div class="slide" id="6"><h2>Pourquoi Drush est-il important?</h2>
-<p>Permet d'automatiser le plus de fonctions manuelle posible.</p>
-</div><div class="slide" id="7"><h2>Pourquoi Drush est-il important?</h2>
-<p>L'erreur est humaine. Enlevons le facteur humain.</p>
+</div><div class="slide" id="6"><h2>Fonctions de Drush</h2>
+<ul>
+<li>Plus de 50 commandes dans Drush core</li>
+<li>Plus de 100 modules qui s'intêgrent avec Drush
+<img alt="Swiss Arny Knife" src="images/presentation-drush/drush-modules.jpg" /></li>
+</ul>
+</div><div class="slide" id="7"><h2>Fonctions de Drush</h2>
+<p><img alt="Swiss Arny Knife" src="images/presentation-drush/knife2.jpg" /></p>
 </div><div class="slide" id="8"><h2>Pourquoi Drush est-il important?</h2>
-<p>C'est peut-être un développeur junior qui va devoir pousser le code en ligne.</p>
+<p>Permet d'automatiser le plus de fonctions manuelle posible.</p>
 </div><div class="slide" id="9"><h2>Pourquoi Drush est-il important?</h2>
-<p>Tous les sysadmins sont malades (oktoberfest).</p>
+<p>L'erreur est humaine. Enlevons le facteur humain.</p>
 </div><div class="slide" id="10"><h2>Pourquoi Drush est-il important?</h2>
+<p>C'est peut-être un développeur junior qui va devoir pousser le code en ligne.</p>
+</div><div class="slide" id="11"><h2>Pourquoi Drush est-il important?</h2>
+<p>Tous les sysadmins sont malades (oktoberfest).</p>
+</div><div class="slide" id="12"><h2>Pourquoi Drush est-il important?</h2>
 <p>Entandu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."</p>
-</div><div class="slide" id="11"><h2>Comment installer Drush</h2>
+</div><div class="slide" id="13"><h2>Comment installer Drush</h2>
 <p>Pear
     pear channel-discover pear.drush.org
     pear install drush/drush</p>
@@ -66,13 +80,13 @@
     pear config-set php_ini /private/etc/php.ini
     pecl config-set php_ini /private/etc/php.ini<br />
     sudo pear upgrade-all</p>
-</div><div class="slide" id="12"><h2>Comment installer Drush :: Pear</h2>
+</div><div class="slide" id="14"><h2>Comment installer Drush :: Pear</h2>
 <ul>
 <li>Permet de mettre à jour facilement.</li>
 <li>Accessible de tous les utilisateurs sur la machine</li>
 </ul>
-</div><div class="slide" id="13"><h2>Où est-il installé?</h2>
-</div><div class="slide" id="14"><h2>Drush aliases</h2>
+</div><div class="slide" id="15"><h2>Où est-il installé?</h2>
+</div><div class="slide" id="16"><h2>Drush aliases</h2>
 <pre><code>$aliases\['dev'\] = array(
     'root' =&gt; '/path/to/drupal',
     'uri' =&gt; 'dev.mydrupalsite.com',
@@ -82,15 +96,15 @@ $aliases\['live'\] = array(
     'uri' =&gt; 'mydrupalsite.com',
 );
 </code></pre>
-</div><div class="slide" id="15"><h2>Fonctions importantes</h2>
+</div><div class="slide" id="17"><h2>Fonctions importantes</h2>
 <ul>
 <li>sql-dump (drush @dev sql-dump &gt; backup.sql)</li>
 <li>sql-connect (drush @live sql-connect)</li>
 </ul>
-</div><div class="slide" id="16"><h2>Drush make</h2>
+</div><div class="slide" id="18"><h2>Drush make</h2>
 <p>Compile en cascade un projet.</p>
 <p>Télécharge tous les modules et les patchs spécifiées.</p>
-</div><div class="slide" id="17"><h2>Drush make example</h2>
+</div><div class="slide" id="19"><h2>Drush make example</h2>
 <p>https://github.com/Wiredcraft/example
     core = "7.x"
     api = "2"</p>
@@ -104,23 +118,23 @@ projects[mollom][type] = "module"
 projects[mollom][subdir] = "contrib"
 projects[mollom][version] = "1.1"
 </code></pre>
-</div><div class="slide" id="18"><h2>Git?</h2>
-</div><div class="slide" id="19"><h2>Git</h2>
-</div><div class="slide" id="20"><h2>Branch</h2>
-</div><div class="slide" id="21"><h2>Pull</h2>
-</div><div class="slide" id="22"><h2>Remotes</h2>
-</div><div class="slide" id="23"><h2>Push</h2>
-</div><div class="slide" id="24"><h2>Gitolite/Gitosis</h2>
+</div><div class="slide" id="20"><h2>Git?</h2>
+</div><div class="slide" id="21"><h2>Git</h2>
+</div><div class="slide" id="22"><h2>Branch</h2>
+</div><div class="slide" id="23"><h2>Pull</h2>
+</div><div class="slide" id="24"><h2>Remotes</h2>
+</div><div class="slide" id="25"><h2>Push</h2>
+</div><div class="slide" id="26"><h2>Gitolite/Gitosis</h2>
 <p>Gitosis est mort, longue vie à Gitosis!</p>
 <p>Dernier commit est en 2009.
 Gitolite est complet et fonctionne bien.</p>
-</div><div class="slide" id="25"><h2>Fabric?</h2>
-</div><div class="slide" id="26"><h2>Fabric</h2>
-</div><div class="slide" id="27"><h2>Config SSH</h2>
-</div><div class="slide" id="28"><h2>Autres outils à considérer</h2>
-</div><div class="slide" id="29"><h2>Jenkins</h2>
-</div><div class="slide" id="30"><h2>Ansible - Chef - Puppet - BCFG2</h2>
-</div><div class="slide" id="31"><h2>Vagrant</h2>
+</div><div class="slide" id="27"><h2>Fabric?</h2>
+</div><div class="slide" id="28"><h2>Fabric</h2>
+</div><div class="slide" id="29"><h2>Config SSH</h2>
+</div><div class="slide" id="30"><h2>Autres outils à considérer</h2>
+</div><div class="slide" id="31"><h2>Jenkins</h2>
+</div><div class="slide" id="32"><h2>Ansible - Chef - Puppet - BCFG2</h2>
+</div><div class="slide" id="33"><h2>Vagrant</h2>
 </div>
 <!-- Begin extension snippets. Add or remove as needed. -->
 

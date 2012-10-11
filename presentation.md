@@ -1,17 +1,32 @@
 # Déploiement de niveau entreprise avec Git, Drush et Fabric
 
 ## Drush
+![Swiss Arny Knife](images/presentation-drush/knife.jpg)
+
 ## Drush?
-![Broken Window](/images/presentation-drush/window-1.jpg)
+![Broken Window](images/presentation-drush/window-1.jpg)
 
 ## Drush!
-![Clean Window](/images/presentation-drush/window-2.jpg)
+![Clean Window](images/presentation-drush/window-2.jpg)
 
 ## Fonctions de Drush
 - Télécharger des modules
 - Activer/Désactiver des modules
 - Déinstaller des modules
 - Rouler les tests\*
+- Vider les cache
+- Cron
+- Gérer les utilisateurs
+- Récupérer et changer les valeurs des variables de configuration
+- ...
+
+## Fonctions de Drush
+- Plus de 50 commandes dans Drush core
+- Plus de 100 modules qui s'intêgrent avec Drush
+![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
+
+## Fonctions de Drush
+![Swiss Arny Knife](images/presentation-drush/knife2.jpg)
 
 ## Pourquoi Drush est-il important?
 Permet d'automatiser le plus de fonctions manuelle posible.
