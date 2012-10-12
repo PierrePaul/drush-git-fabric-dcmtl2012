@@ -1,10 +1,19 @@
-.pheromone-logo {
+.infos {
     position:absolute;
     right:0;
     top:50px;
     z-index:9999;
 }
 
-h2 {
+.infos .authors {
+    float:left;
+    margin-top:15px;
+}
+
+.infos img {
+    float:right;
+}
+
+.deck-container h2 {
     min-height:65px;
 }

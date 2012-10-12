@@ -107,19 +107,14 @@ Les caneaux officiels sont toujours en retard sur le développement.
 - sql-dump (drush @dev sql-dump > backup.sql)
 - sql-connect (drush @live sql-connect)
 - cache-clear all
-<!--
-
--->
+<!---->
 
 ## Drush make
 Compile en cascade un projet.
 
 Télécharge tous les modules et les patchs spécifiées.
 
-http://drushmake.me
-<!--
-
--->
+<!---->
 
 ## Drush make example
 
@@ -133,6 +128,13 @@ http://drushmake.me
     projects[mollom][type] = "module"
     projects[mollom][subdir] = "contrib"
     projects[mollom][version] = "1.1"
+
+Petit site permettant de construire un make file pour Drush, pour un nouveau projet.
+
+<http://drushmake.me>
+<!--
+Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire.
+-->
 
 ## Git?
 C'est comme SVN, mais complêtement différend.

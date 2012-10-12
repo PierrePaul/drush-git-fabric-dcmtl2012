@@ -32,7 +32,13 @@
 
 </head>
 <body class="deck-container">
-    <img class="pheromone-logo" src="images/pheromone.png" alt="Pheromone logo"/>
+    <div class="infos">
+        <div class="authors">
+            <address class="author"><a rel="author" href="http://drupal.org/user/872688" title="Pierre Paul Lefebvre">Pierre Paul Lefebvre</a></address>
+            <address class="author"><a rel="author" href="http://drupal.org/user/215342" title="Pierre Buyle">Pierre Buyle</a></address>
+        </div>
+        <img class="pheromone-logo" src="images/pheromone.png" alt="Pheromone logo"/>
+    </div>
 <div class="slide" id="1"><h1>Déploiement de niveau entreprise avec Git, Drush et Fabric</h1>
 </div><div class="slide" id="2"><h2>Intro</h2>
 <p><img alt="Armageddon movie" src="images/presentation-drush/armageddon.jpg" />
@@ -131,15 +137,13 @@ $aliases['live'] = array(
 <li>sql-dump (drush @dev sql-dump &gt; backup.sql)</li>
 <li>sql-connect (drush @live sql-connect)</li>
 <li>cache-clear all
-&lt;!--</li>
+<!----></li>
 </ul>
-<p>--&gt;</p>
 </div><div class="slide" id="17"><h2>Drush make</h2>
 <p>Compile en cascade un projet.</p>
 <p>Télécharge tous les modules et les patchs spécifiées.</p>
-<p>http://drushmake.me
-&lt;!--</p>
-<p>--&gt;</p>
+<!---->
+
 </div><div class="slide" id="18"><h2>Drush make example</h2>
 <p><a href="https://github.com/Wiredcraft/example">https://github.com/Wiredcraft/example</a></p>
 <pre><code>core = "7.x"
@@ -151,6 +155,11 @@ projects[mollom][type] = "module"
 projects[mollom][subdir] = "contrib"
 projects[mollom][version] = "1.1"
 </code></pre>
+<p>Petit site permettant de construire un make file pour Drush, pour un nouveau projet.</p>
+<p><a href="http://drushmake.me">http://drushmake.me</a>
+<!--
+Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire.
+--></p>
 </div><div class="slide" id="19"><h2>Git?</h2>
 <p>C'est comme SVN, mais complêtement différend.
 <img alt="Koala" src="images/presentation-drush/koala.jpg" /></p>
