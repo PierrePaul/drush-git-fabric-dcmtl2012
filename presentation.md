@@ -12,6 +12,12 @@ La technique s'addresse surtout aux moyennes entreprises qui ont au moins un sys
 Vers la fin de la session, nous allons aussi vous présentez des pistes pour ajuster la technique dans un contexte de plus grosse entreprises.
 -->
 
+## But ultime
+![Intro](images/presentation-drush/processus-intro.png)
+<!--
+Voici notre but ultime. Nous allons passer en revue chacun des points et des technologies impliquées.
+-->
+
 ## Drush
 ![Swiss Arny Knife](images/presentation-drush/knife.jpg)
 <!--
@@ -64,6 +70,7 @@ Entandu chez un client : "En toute franchise, la documentation de projet, c'est 
 
 ## Comment installer Drush
 Pear
+-----
     pear channel-discover pear.drush.org
     pear install drush/drush
 
@@ -75,11 +82,9 @@ _Pear est brisé_ sur MacOSX Mountain Lion
     pecl config-set php\_ini /private/etc/php.ini  
     sudo pear upgrade-all
 
-## Comment installer Drush :: Pear
 ### Permet de mettre à jour facilement.
 Les caneaux officiels sont toujours en retard sur le développement.
 
-## Où est-il installé?
 
 ## Drush aliases
     $aliases['dev'] = array(
@@ -90,6 +95,7 @@ Les caneaux officiels sont toujours en retard sur le développement.
         'root' => '/other/path/to/drupal',
         'uri' => 'mydrupalsite.com',
     );
+
 ## Fonctions importantes
 - sql-dump (drush @dev sql-dump > backup.sql)
 - sql-connect (drush @live sql-connect)
@@ -112,6 +118,7 @@ https://github.com/Wiredcraft/example
     projects[mollom][type] = "module"
     projects[mollom][subdir] = "contrib"
     projects[mollom][version] = "1.1"
+
 ## Git?
 C'est comme SVN, mais complêtement différend.
 ![Koala](images/presentation-drush/koala.jpg)
@@ -120,10 +127,29 @@ C'est comme SVN, mais complêtement différend.
 http://git-scm.com/
 http://try.github.com/
 
-## Branch
+## Branches
+Git permet d'utiliser différentes branches, tout comme SVN. 
+
+Dans notre schema, chaque branche correspond à un serveur.
+
+Branche master = serveur dev
+
+Branche stage = serveur de stage
+
+Branche prod = serveur de production
+
 ## Pull
+L'équivalent de `svn up`, permet d'aller chercher les derniers changements sur notre repos.
+
 ## Remotes
+Un remote, en terme Git, correspond à une destination distante. Dans notre cas, on parle de nos serveurs Dev, Stage et Prod. 
+
+Seul le serveur ayant Gitolite aura les remotes Dev, Stage et Prod configurés.
+
+Git/Gitolite passe par SSH pour transferer les fichiers. Donc le machine de deploiement devra avoir sa clef SSH enregistrée sur les serveurs distants pour pousser les fichiers automatiquement (sans user input).
 ## Push
+Action qui permet de pousser le code sur un remote.
+
 ## Gitolite/Gitosis
 Gitosis est mort, longue vie à Gitosis!
 
