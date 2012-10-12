@@ -1,0 +1,12 @@
+blockdiag {
+    A [label = "Git", color = "red"]
+    B [label = "Gitolite", color = "red"]
+    C [label = "Dev", color = "red"]
+    D [label = "Stage", color = "red"]
+    E [label = "Prod", color = "red"]
+    F [label = "Fabric"]
+
+    A -> B -> C, D <- F;
+    E -> C [style = dotted];
+    E <- F [style = dotted];
+}

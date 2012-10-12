@@ -45,28 +45,34 @@ Et beaucoup beaucoup plus.
 - Plus de 100 modules qui s'intêgrent avec Drush
 ![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
 <!-- 
-Chaque module peut définir ses actions drush qu'il supporte. 
-@TODO expliquer comment supporter drush dans son module
 -->
 
 ## Fonctions de Drush
+Chaque module peut définir ses propres actions drush.
 ![Swiss Arny Knife](images/presentation-drush/knife2.jpg)
 
 ## Pourquoi Drush est-il important?
 Permet d'automatiser le plus de fonctions manuelle posible.
+<!--
+On veut éviter le plus possible les intéractions humaines dans le processsus.
+Vider la cache, par exemple, est souvent un problème facile à régler avec Drush.
+-->
 ## Pourquoi Drush est-il important?
 L'erreur est humaine.
 
 Enlevons le facteur humain.
 
 ## Pourquoi Drush est-il important?
-C'est peut-être un développeur junior qui va devoir pousser le code en ligne.
+C'est peut-être un développeur junior, ou avec moi d'expérience avec Drupal qui va devoir pousser le code en ligne.
 ## Pourquoi Drush est-il important?
 Tous les sysadmins sont malades.
 
 ![Oktoberfest](images/presentation-drush/oktoberfest.gif)
 ## Pourquoi Drush est-il important?
 Entandu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."
+<!--
+Drush et le processus complet, permet une sorte de documentation obligatoire implicite.
+-->
 
 ## Comment installer Drush
 Pear
@@ -87,6 +93,7 @@ Les caneaux officiels sont toujours en retard sur le développement.
 
 
 ## Drush aliases
+
     $aliases['dev'] = array(
         'root' => '/path/to/drupal',
         'uri' => 'dev.mydrupalsite.com',
@@ -100,15 +107,23 @@ Les caneaux officiels sont toujours en retard sur le développement.
 - sql-dump (drush @dev sql-dump > backup.sql)
 - sql-connect (drush @live sql-connect)
 - cache-clear all
+<!--
+
+-->
 
 ## Drush make
 Compile en cascade un projet.
 
 Télécharge tous les modules et les patchs spécifiées.
+
 http://drushmake.me
+<!--
+
+-->
 
 ## Drush make example
-https://github.com/Wiredcraft/example
+
+<https://github.com/Wiredcraft/example>
 
     core = "7.x"
     api = "2"
@@ -124,8 +139,11 @@ C'est comme SVN, mais complêtement différend.
 ![Koala](images/presentation-drush/koala.jpg)
 
 ## Git
-http://git-scm.com/
-http://try.github.com/
+Git :
+<http://git-scm.com/>
+
+Beau tutoriel fait en collaboration avec CodeSchool, amusant et simple :
+<http://try.github.com/>
 
 ## Branches
 Git permet d'utiliser différentes branches, tout comme SVN. 
@@ -147,8 +165,13 @@ Un remote, en terme Git, correspond à une destination distante. Dans notre cas,
 Seul le serveur ayant Gitolite aura les remotes Dev, Stage et Prod configurés.
 
 Git/Gitolite passe par SSH pour transferer les fichiers. Donc le machine de deploiement devra avoir sa clef SSH enregistrée sur les serveurs distants pour pousser les fichiers automatiquement (sans user input).
+
 ## Push
 Action qui permet de pousser le code sur un remote.
+
+<!--
+Une belle fonctionnalité que l'on ne retrouve pas sur svn, Git permet d'envoyer le code sur un serveur (remote) distant.
+-->
 
 ## Gitolite/Gitosis
 Gitosis est mort, longue vie à Gitosis!
@@ -167,11 +190,87 @@ Petite librairie python permettant d'automatiser des tâches sur un ou des serve
 
 ## Fabric
 Peut facilement être remplacé par Jenkins.
+Elle sert dans notre processus à déployer les bases de données entre chacun des serveurs.
 
+Habituellement les développeurs vont avoir accès pour pousser les bases de données sur les serveurs de Dev et Stage.
+Seulement le sysadmin ou la machine de déploiement a les droits pour pousser sur la machine de production.
+<!--
+Un truc important, le processus ne gère pas le "content staging". Node export peut aider le content staging, mais c'est loin d'être une solution fiable. Le projet Migrate fait beaucoup, mais cest long et compliqué quand ca marche pas.
+-->
+
+## Exemple Fabric
+Exemple de script pour pousser la DB sur un serveur distant
+
+    from fabric.api import *
+    env.use_ssh_config = True
+
+
+    @task(default=True)
+    def pushDB(env='local'):
+        local('drush @via sql-dump --result-file=/tmp/via-dump.sql')
+        db_connect = local('drush sql-connect --uri=http://supersite.' + env +
+        '.drupalcampmontreal.org', True)
+        local(db_connect + ' < /tmp/via-dump.sql')
+
+<!--
+On suppose ici que les settings.php sont défiinis pour chacun des environnements dans sites/
+C'est une mauvaise supposition, mais c'est important pour garder l'exemple le plus simple que possible.
+-->
 ## Config SSH
 Les dernieres versions peuvent lire dans la config SSH du client initiant les commandes.
 
+    Host        supersite.stage
+    HostName    10.111.222.333 
+    User        deployuser
+
 ## Autres outils à considérer
+C'est une belle technique qui reste quand même simple et flexible, mais difficile à maintenir quand le nombre de serveurs dépassent une trentaine.
+
 ## Jenkins
-## Ansible - Chef - Puppet - BCFG2
+Pour ceux qui veulent se rendre au prochain niveau, Jenkins est là.
+
+Jenkins vous permet de rouler les tests et peut être inséré dans le processus avant de faire un déploiement.
+C'est long rouler les tests.
+
+Il peut aussi être utiliser pour vérifier que les Coding Standards ont bien été suivis entre chacune des versions du site web.
+
+
+## Ansible - Chef
+<!--
+D'autres solutions sont disponibles par contre pour aider à maintenir l'ajout de nouveau serveurs/sites.
+Des solutions qui sont disponibles aux sysadmins qui permettent de gérer les configurations sur leur serveurs, mais qui peuvent aussi servir
+à maintenir à jour notre config ssh, la création de users ou de sites dans notre gitolite, s'assurer que Drush soit installé et à jour sur les serveurs, etc.
+-->
+Ansible
+---
+Belle solution python, probablement la plus simple des quatres.
+
+<http://ansible.cc/>
+
+Le nouveau site web est beaucoup plus accessible et convivial.
+
+Chef
+----
+Belle solution ruby un peu plus complexe. Stable avec beaucoup de développement.
+
+<http://wiki.opscode.com/display/chef/Home>
+
+Beaucoup de "cookbooks" sont développé par la communauté
+
+<http://community.opscode.com/cookbooks>
+
+Beaucoup d'autres solutions existent (cdist, puppet, bcfg2, etc) avec des niveaux de complexité variés.
+
+<http://en.wikipedia.org/wiki/Comparison_of_open_source_configuration_management_software>
+
+
 ## Vagrant
+Vagrant permet de créer des environnements virtualisés pour reproduire les serveurs de productions, mais avec le développeur en tête. 
+
+Le développeur peut lancer Vagrant pour avoir un environnement de développement identique à celui de la production. Plus jamais vous allez entendre "Mais ça marche sur ma machine!"
+
+<!--
+C'est pas tout à fait vrai, mais ca aide à l'entendre beaucoup moins souvent.
+-->
+
+## Questions?
