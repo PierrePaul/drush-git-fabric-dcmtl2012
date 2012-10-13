@@ -57,7 +57,7 @@ Permet d'automatiser le plus de fonctions manuelle posible.
 On veut éviter le plus possible les intéractions humaines dans le processsus.
 Vider la cache, par exemple, est souvent un problème facile à régler avec Drush.
 -->
-## Pourquoi Drush est-il important?
+## Pourquoi l'automatisation est-elle importante?
 L'erreur est humaine.
 
 Enlevons le facteur humain.
@@ -69,12 +69,13 @@ Tous les sysadmins sont malades.
 
 ![Oktoberfest](images/presentation-drush/oktoberfest.gif)
 ## Pourquoi Drush est-il important?
-Entandu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."
+Entendu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."
 <!--
 Drush et le processus complet, permet une sorte de documentation obligatoire implicite.
 -->
 
 ## Comment installer Drush
+
 Pear
 -----
     pear channel-discover pear.drush.org
@@ -225,6 +226,8 @@ Les dernieres versions peuvent lire dans la config SSH du client initiant les co
     HostName    10.111.222.333 
     User        deployuser
 
+Avec ce snippet dans votre configuration, vous pouvez vous connecter avec `ssh supersite.stage` sans spécifier le port, le user ou le mot de passe (si la clef SSH est authoriser).
+
 ## Autres outils à considérer
 C'est une belle technique qui reste quand même simple et flexible, mais difficile à maintenir quand le nombre de serveurs dépassent une trentaine.
 
@@ -241,11 +244,16 @@ Il peut aussi être utiliser pour vérifier que les Coding Standards ont bien é
 <!--
 D'autres solutions sont disponibles par contre pour aider à maintenir l'ajout de nouveau serveurs/sites.
 Des solutions qui sont disponibles aux sysadmins qui permettent de gérer les configurations sur leur serveurs, mais qui peuvent aussi servir
-à maintenir à jour notre config ssh, la création de users ou de sites dans notre gitolite, s'assurer que Drush soit installé et à jour sur les serveurs, etc.
+à maintenir à jour 
+
+- notre config ssh, 
+- la création de users ou de sites dans notre gitolite, 
+- s'assurer que Drush soit installé et à jour sur les serveurs, etc.
+- authoriser automatiquement la clef SSH du user de deploy
 -->
 Ansible
 ---
-Belle solution python, probablement la plus simple des quatres.
+Belle solution python, probablement la plus simple.
 
 <http://ansible.cc/>
 
@@ -257,7 +265,7 @@ Belle solution ruby un peu plus complexe. Stable avec beaucoup de développement
 
 <http://wiki.opscode.com/display/chef/Home>
 
-Beaucoup de "cookbooks" sont développé par la communauté
+Beaucoup de "cookbooks" sont développés par la communauté
 
 <http://community.opscode.com/cookbooks>
 
