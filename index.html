@@ -56,14 +56,42 @@ Vers la fin de la session, nous allons aussi vous présentez des pistes pour aju
 <!--
 Voici notre but ultime. Nous allons passer en revue chacun des points et des technologies impliquées.
 --></p>
-</div><div class="slide" id="4"><h2>Drush</h2>
+</div><div class="slide" id="4"><h2>Le processus doit être automatisé ?</h2>
+<p>L'être humain est</p>
+<ul>
+<li>lent</li>
+<li>pas très fiable</li>
+<li>approximatifs</li>
+<li>doté de peu de mémoire</li>
+</ul>
+<p>Les ordinateurs sont</p>
+<ul>
+<li>rapides</li>
+<li>fiables</li>
+<li>precises</li>
+<li>dotés d'une excellente mémoire</li>
+</ul>
+<!--
+Deployer manuellement est _error prone_, l'automatisation permet d'éliminer les risques
+d'oublis, d'erreur de manipulation, etc. Au prix d'un effert supplémentaire en
+planification. Un processus automatisé est auto-documenté (pour peu qu'on écrive pas ces
+script à la truelle).
+-->
+
+</div><div class="slide" id="5"><h2>Nos outils</h2>
+<ul>
+<li>Drush</li>
+<li>Git</li>
+<li>Fabric</li>
+</ul>
+</div><div class="slide" id="6"><h2>Drush</h2>
 <p><img alt="Swiss Arny Knife" src="images/presentation-drush/knife.jpg" />
 <!--
 Drush est le couteau suisse Drupal. Il permet, via la ligne de commande, d'intéragir directement avec notre installation Drupal.
 C'est un must dans notre technique si on veut avoir une démarche complêtement automatisée, sans aucune intéraction humaine.
 Drush *fonctionne* sous Windows. Parfois plus simple et plus sécuritaire de travailler dans une machine virtuelle comme QuickStart.
 --></p>
-</div><div class="slide" id="5"><h2>Fonctions de Drush</h2>
+</div><div class="slide" id="7"><h2>Fonctions de Drush</h2>
 <ul>
 <li>Télécharger des modules</li>
 <li>Activer/Désactiver des modules</li>
@@ -78,51 +106,74 @@ Drush *fonctionne* sous Windows. Parfois plus simple et plus sécuritaire de tra
 Et beaucoup beaucoup plus.
 --></li>
 </ul>
-</div><div class="slide" id="6"><h2>Fonctions de Drush</h2>
+</div><div class="slide" id="8"><h2>Drush est exentensible</h2>
 <ul>
-<li>Plus de 50 commandes dans Drush core</li>
 <li>Plus de 100 modules qui s'intêgrent avec Drush
-<img alt="Swiss Arny Knife" src="images/presentation-drush/drush-modules.jpg" />
-<!-- 
+  <img alt="Swiss Arny Knife" src="images/presentation-drush/drush-modules.jpg" /></li>
+<li>Implementations de <code>hook</code>s pour définir ses propres commandes
+<!--
 --></li>
 </ul>
-</div><div class="slide" id="7"><h2>Fonctions de Drush</h2>
-<p>Chaque module peut définir ses propres actions drush.
+</div><div class="slide" id="9"><h2>Fonctions de Drush</h2>
+<p><!--
+Au final, Drush ca rassemblerait donc plutot à ca...
+-->
 <img alt="Swiss Arny Knife" src="images/presentation-drush/knife2.jpg" /></p>
-</div><div class="slide" id="8"><h2>Pourquoi Drush est-il important?</h2>
-<p>Permet d'automatiser le plus de fonctions manuelle posible.
-<!--
-On veut éviter le plus possible les intéractions humaines dans le processsus.
-Vider la cache, par exemple, est souvent un problème facile à régler avec Drush.
---></p>
-</div><div class="slide" id="9"><h2>Pourquoi Drush est-il important?</h2>
-<p>L'erreur est humaine.</p>
-<p>Enlevons le facteur humain.</p>
 </div><div class="slide" id="10"><h2>Pourquoi Drush est-il important?</h2>
-<p>C'est peut-être un développeur junior, ou avec moi d'expérience avec Drupal qui va devoir pousser le code en ligne.</p>
-</div><div class="slide" id="11"><h2>Pourquoi Drush est-il important?</h2>
-<p>Tous les sysadmins sont malades.</p>
-<p><img alt="Oktoberfest" src="images/presentation-drush/oktoberfest.gif" /></p>
-</div><div class="slide" id="12"><h2>Pourquoi Drush est-il important?</h2>
-<p>Entandu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."
+<ul>
+<li>Rapide</li>
+<li>Simple</li>
+<li>Complet</li>
+<li>Scriptable</li>
+<li>Automatisable
 <!--
-Drush et le processus complet, permet une sorte de documentation obligatoire implicite.
---></p>
-</div><div class="slide" id="13"><h2>Comment installer Drush</h2>
-</div><div class="slide" id="14"><h2>Pear</h2>
+ Rapide => Une action qui prendrait plusieurs clicks/page loads se fait en une seule étape
+ Simple => Les commandes sont généralement simples et effectue une seule action
+ Complet => Il couvre la plupart des besoins (et est facilement extensible)
+ Scriptable => Facile a exploiter depuis n'importe quel language de script orienté execution de commande
+--></li>
+</ul>
+</div><div class="slide" id="11"><h2>Comment installer Drush</h2>
+<h3>Pear</h3>
 <pre><code>pear channel-discover pear.drush.org
 pear install drush/drush
 </code></pre>
-<p><em>Pear est brisé</em> sur MacOSX Mountain Lion</p>
+<h3>Pear Windows Installer</h3>
+<p>http://www.drush.org/drush_windows_installer</p>
+<h3>Gestionnaire de packages</h3>
+<p>sudo aptitude install drush</p>
+</div><div class="slide" id="12"><h2>Comment installer Drush (Pear)</h2>
+<p>Pear est la solution la plus simple pour avoir rapidement accès à la dernière
+version.</p>
+<p>Mais Pear <em>est brisé</em> sur MacOSX Mountain Lion</p>
 <pre><code>sudo cp /private/etc/php.ini.default /private/etc/php.ini
 sudo php /usr/lib/php/install-pear-nozlib.phar
 pear config-set php\_ini /private/etc/php.ini
-pecl config-set php\_ini /private/etc/php.ini  
+pecl config-set php\_ini /private/etc/php.ini
 sudo pear upgrade-all
 </code></pre>
-<h3>Permet de mettre à jour facilement.</h3>
-<p>Les caneaux officiels sont toujours en retard sur le développement.</p>
-</div><div class="slide" id="15"><h2>Drush aliases</h2>
+</div><div class="slide" id="13"><h2>Usage</h2>
+<pre><code>$  drush --root=/path/to/drupal --uri=dev.mydrupalsite.com status
+ Drupal version         :  7.15
+ Site URI               :  http://dev.mydrupalsite.com/
+ Database driver        :  mysql
+ Database hostname      :  localhost
+ Database username      :  drupal
+ Database name          :  drupal
+ Default theme          :  garland
+ Administration theme   :  seven
+ PHP configuration      :  /etc/php-cli.ini
+ Drush version          :  5.7
+ Drush configuration    :  /home/fry/.drush/drushrc.php
+ Drush alias files      :  /home/fry/.drush/aliases.drush.rc
+ Drupal root            :  /path/to/drupal
+ Site path              :  sites/default
+ File directory path    :  sites/default/files
+</code></pre>
+<p>$</p>
+</div><div class="slide" id="14"><h2>Configuration de Drush</h2>
+<h3><code>drushrc.php</code></h3>
+<h3><code>aliases.drushrc.php</code></h3>
 <pre><code>$aliases['dev'] = array(
     'root' =&gt; '/path/to/drupal',
     'uri' =&gt; 'dev.mydrupalsite.com',
@@ -130,82 +181,91 @@ sudo pear upgrade-all
 $aliases['live'] = array(
     'root' =&gt; '/other/path/to/drupal',
     'uri' =&gt; 'mydrupalsite.com',
+    'remote-host' =&gt; 'myprodserver.myisp.com',
+    'remote-user' =&gt; 'publisher',
 );
 </code></pre>
-</div><div class="slide" id="16"><h2>Fonctions importantes</h2>
-<ul>
-<li>sql-dump (drush @dev sql-dump &gt; backup.sql)</li>
-<li>sql-connect (drush @live sql-connect)</li>
-<li>cache-clear all
-<!----></li>
-</ul>
-</div><div class="slide" id="17"><h2>Drush make</h2>
-<p>Compile en cascade un projet.</p>
-<p>Télécharge tous les modules et les patchs spécifiées.</p>
-<!---->
+<!-- -->
 
-</div><div class="slide" id="18"><h2>Drush make example</h2>
-<p><a href="https://github.com/Wiredcraft/example">https://github.com/Wiredcraft/example</a></p>
-<pre><code>core = "7.x"
-api = "2"
-; Includes ====================================================================
-includes[] = "https://raw.github.com/makara/buildkit_plus_v7/master/base.make"
-; Modules =====================================================================
-projects[mollom][type] = "module"
-projects[mollom][subdir] = "contrib"
-projects[mollom][version] = "1.1"
+<pre><code>drush @dev status
 </code></pre>
-<p>Petit site permettant de construire un make file pour Drush, pour un nouveau projet.</p>
-<p><a href="http://drushmake.me">http://drushmake.me</a>
+<!-- On ne s'étale pas, simple réference aux alias qui sont utile pour automatiser. -->
+
+</div><div class="slide" id="15"><h2>Fonctions importantes</h2>
+<ul>
+<li><code>drush @dev sql-dump &gt; backup.sql</code></li>
+<li><code>drush sql-sync @prod @dev</code></li>
+<li><code>drush rsync @dev @stage</code></li>
+<li><code>drush rsync ./ @stage:%files/img</code></li>
+<li><code>drush @dev clear-cache all</code></li>
+<li><code>drush @dev updatedb</code></li>
+<li><code>drush make mydrupalsite.make</code></li>
+</ul>
 <!--
+Expliquer brievement chaque commande et son usage dans le cadre d'un déploiement.
 Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire.
---></p>
-</div><div class="slide" id="19"><h2>Git?</h2>
-<p>C'est comme SVN, mais complêtement différend.
-<img alt="Koala" src="images/presentation-drush/koala.jpg" /></p>
-</div><div class="slide" id="20"><h2>Git</h2>
-<p>Git :
-<a href="http://git-scm.com/">http://git-scm.com/</a></p>
-<p>Beau tutoriel fait en collaboration avec CodeSchool, amusant et simple :
-<a href="http://try.github.com/">http://try.github.com/</a></p>
-</div><div class="slide" id="21"><h2>Branches</h2>
-<p>Git permet d'utiliser différentes branches, tout comme SVN. </p>
-<p>Dans notre schema, chaque branche correspond à un serveur.</p>
-<p>Branche master = serveur dev</p>
-<p>Branche stage = serveur de stage</p>
-<p>Branche prod = serveur de production</p>
-</div><div class="slide" id="22"><h2>Pull</h2>
-<p>L'équivalent de <code>svn up</code>, permet d'aller chercher les derniers changements sur notre repos.</p>
-</div><div class="slide" id="23"><h2>Remotes</h2>
-<p>Un remote, en terme Git, correspond à une destination distante. Dans notre cas, on parle de nos serveurs Dev, Stage et Prod. </p>
-<p>Seul le serveur ayant Gitolite aura les remotes Dev, Stage et Prod configurés.</p>
-<p>Git/Gitolite passe par SSH pour transferer les fichiers. Donc le machine de deploiement devra avoir sa clef SSH enregistrée sur les serveurs distants pour pousser les fichiers automatiquement (sans user input).</p>
-</div><div class="slide" id="24"><h2>Push</h2>
-<p>Action qui permet de pousser le code sur un remote.</p>
-<!--
-Une belle fonctionnalité que l'on ne retrouve pas sur svn, Git permet d'envoyer le code sur un serveur (remote) distant.
 -->
 
-</div><div class="slide" id="25"><h2>Gitolite/Gitosis</h2>
+</div><div class="slide" id="16"><h2>Git</h2>
+<p><img alt="Git" src="images/presentation-drush/git.jpg" /></p>
+</div><div class="slide" id="17"><h2>Git</h2>
+<p><div style="float: right"><img src="images/presentation-drush/druplicon-git.png" /></div>
+ - Git est un logiciel de gestion de versions décentralisé.
+ - Permet de maintenir l'historique du versions de code.
+ - Support de nombreux <em>workflow</em> d'édition et de partage de code.
+ - Utilisé sur Drupal.org, requis pour contribué</p>
+<ul>
+<li><a href="http://git-scm.com/">http://git-scm.com/</a></li>
+<li><a href="http://try.github.com/">http://try.github.com/</a></li>
+<li><a href="http://drupal.org/documentation/git">http://drupal.org/documentation/git</a></li>
+</ul>
+</div><div class="slide" id="18"><h2>Branches</h2>
+<p><img alt="Git" src="images/presentation-drush/branches.png" /></p>
+</div><div class="slide" id="19"><h2>Deployer le code avec Git</h2>
+<p>Le déploiement se fait par mise à jour d'une dépot Git <em>local</em> au serveur sur lequel on déploie.</p>
+<h3>Pull</h3>
+<p>Récupérer les derniers changements dans un dépôt de code central depuis le serveur sur lequel on déploie.</p>
+<h3>Push</h3>
+<p>Envoyer les derniers changements dans un dépot local vers le serveur sur lequel on déploie.</p>
+</div><div class="slide" id="20"><h2>Gitolite/Gitosis</h2>
+<p>Permet de facilement gérer un serveur de dépôts de code <em>centralisés</em> avec un contrôle d'accès par utilisateurs et groupes d'utilisateurs.</p>
 <p>Gitosis est mort, longue vie à Gitosis!</p>
 <p>Dernier commit est en 2009.
 Gitolite est complet et fonctionne bien.</p>
-<ul>
-<li>Permet d'assigner des permissions à des utilisateurs/groupes </li>
-</ul>
-<p>Le truc : centraliser un système de versionnage décentralisé afin de faire les déploiements.</p>
-</div><div class="slide" id="26"><h2>Fabric?</h2>
-<p>Petite librairie python permettant d'automatiser des tâches sur un ou des serveurs distants.</p>
-<p><img alt="Python logo" src="images/presentation-drush/python.png" /></p>
-</div><div class="slide" id="27"><h2>Fabric</h2>
-<p>Peut facilement être remplacé par Jenkins.
-Elle sert dans notre processus à déployer les bases de données entre chacun des serveurs.</p>
-<p>Habituellement les développeurs vont avoir accès pour pousser les bases de données sur les serveurs de Dev et Stage.
-Seulement le sysadmin ou la machine de déploiement a les droits pour pousser sur la machine de production.
+<!-- Le truc : centraliser un système de versionnage décentralisé afin de faire les déploiements. -->
+
+</div><div class="slide" id="21"><h2>Fabric</h2>
+<p><div style="float: right"><img src="images/presentation-drush/python.png" /></div></p>
+<p>Librairie Python permettant d'automatiser des tâches sur un ou des serveurs distants.</p>
+<pre><code>from fabric.api import run
+
+def host_type()
+   run('uname -s')
+</code></pre>
+<!-- -->
+
+<pre><code>$ fab -H localhost,linuxbox host_type
+[localhost] run: uname -s
+[localhost] out: Darwin
+[linuxbox] run: uname -s
+[linuxbox] out: Linux
+
+Done.
+Disconnecting from localhost... done.
+Disconnecting from linuxbox... done.
+</code></pre>
 <!--
+
+Peut facilement être remplacé par Jenkins.
+Elle sert dans notre processus à déployer les bases de données entre chacun des serveurs.
+
+Habituellement les développeurs vont avoir accès pour pousser les bases de données sur les serveurs de Dev et Stage.
+Seulement le sysadmin ou la machine de déploiement a les droits pour pousser sur la machine de production.
+
 Un truc important, le processus ne gère pas le "content staging". Node export peut aider le content staging, mais c'est loin d'être une solution fiable. Le projet Migrate fait beaucoup, mais cest long et compliqué quand ca marche pas.
---></p>
-</div><div class="slide" id="28"><h2>Exemple Fabric</h2>
+-->
+
+</div><div class="slide" id="22"><h2>Exemple Fabric</h2>
 <p>Exemple de script pour pousser la DB sur un serveur distant</p>
 <pre><code>from fabric.api import *
 env.use_ssh_config = True
@@ -222,45 +282,52 @@ On suppose ici que les settings.php sont défiinis pour chacun des environnement
 C'est une mauvaise supposition, mais c'est important pour garder l'exemple le plus simple que possible.
 -->
 
-</div><div class="slide" id="29"><h2>Config SSH</h2>
+</div><div class="slide" id="23"><h2>Config SSH</h2>
 <p>Les dernieres versions peuvent lire dans la config SSH du client initiant les commandes.</p>
 <pre><code>Host        supersite.stage
 HostName    10.111.222.333 
 User        deployuser
 </code></pre>
-</div><div class="slide" id="30"><h2>Autres outils à considérer</h2>
+<p>Avec ce snippet dans votre configuration, vous pouvez vous connecter avec <code>ssh supersite.stage</code> sans spécifier le port, le user ou le mot de passe (si la clef SSH est authoriser).</p>
+</div><div class="slide" id="24"><h2>Autres outils à considérer</h2>
 <p>C'est une belle technique qui reste quand même simple et flexible, mais difficile à maintenir quand le nombre de serveurs dépassent une trentaine.</p>
-</div><div class="slide" id="31"><h2>Jenkins</h2>
+</div><div class="slide" id="25"><h2>Jenkins</h2>
 <p>Pour ceux qui veulent se rendre au prochain niveau, Jenkins est là.</p>
 <p>Jenkins vous permet de rouler les tests et peut être inséré dans le processus avant de faire un déploiement.
 C'est long rouler les tests.</p>
 <p>Il peut aussi être utiliser pour vérifier que les Coding Standards ont bien été suivis entre chacune des versions du site web.</p>
-</div><div class="slide" id="32"><h2>Ansible - Chef</h2>
-<p><!--
+</div><div class="slide" id="26"><h2>Ansible - Chef</h2>
+<p>&lt;!--
 D'autres solutions sont disponibles par contre pour aider à maintenir l'ajout de nouveau serveurs/sites.
 Des solutions qui sont disponibles aux sysadmins qui permettent de gérer les configurations sur leur serveurs, mais qui peuvent aussi servir
-à maintenir à jour notre config ssh, la création de users ou de sites dans notre gitolite, s'assurer que Drush soit installé et à jour sur les serveurs, etc.
--->
-Ansible</p>
+à maintenir à jour </p>
+<ul>
+<li>notre config ssh, </li>
+<li>la création de users ou de sites dans notre gitolite, </li>
+<li>s'assurer que Drush soit installé et à jour sur les serveurs, etc.</li>
+<li>authoriser automatiquement la clef SSH du user de deploy
+--&gt;
+Ansible</li>
+</ul>
 <hr />
-<p>Belle solution python, probablement la plus simple des quatres.</p>
+<p>Belle solution python, probablement la plus simple.</p>
 <p><a href="http://ansible.cc/">http://ansible.cc/</a></p>
 <p>Le nouveau site web est beaucoup plus accessible et convivial.</p>
-</div><div class="slide" id="33"><h2>Chef</h2>
+</div><div class="slide" id="27"><h2>Chef</h2>
 <p>Belle solution ruby un peu plus complexe. Stable avec beaucoup de développement.</p>
 <p><a href="http://wiki.opscode.com/display/chef/Home">http://wiki.opscode.com/display/chef/Home</a></p>
-<p>Beaucoup de "cookbooks" sont développé par la communauté</p>
+<p>Beaucoup de "cookbooks" sont développés par la communauté</p>
 <p><a href="http://community.opscode.com/cookbooks">http://community.opscode.com/cookbooks</a></p>
 <p>Beaucoup d'autres solutions existent (cdist, puppet, bcfg2, etc) avec des niveaux de complexité variés.</p>
 <p><a href="http://en.wikipedia.org/wiki/Comparison_of_open_source_configuration_management_software">http://en.wikipedia.org/wiki/Comparison_of_open_source_configuration_management_software</a></p>
-</div><div class="slide" id="34"><h2>Vagrant</h2>
+</div><div class="slide" id="28"><h2>Vagrant</h2>
 <p>Vagrant permet de créer des environnements virtualisés pour reproduire les serveurs de productions, mais avec le développeur en tête. </p>
 <p>Le développeur peut lancer Vagrant pour avoir un environnement de développement identique à celui de la production. Plus jamais vous allez entendre "Mais ça marche sur ma machine!"</p>
 <!--
 C'est pas tout à fait vrai, mais ca aide à l'entendre beaucoup moins souvent.
 -->
 
-</div><div class="slide" id="35"><h2>Questions?</h2>
+</div><div class="slide" id="29"><h2>Questions?</h2>
 </div>
 <!-- Begin extension snippets. Add or remove as needed. -->
 

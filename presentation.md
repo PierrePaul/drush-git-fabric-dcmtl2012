@@ -18,6 +18,34 @@ Vers la fin de la session, nous allons aussi vous présentez des pistes pour aju
 Voici notre but ultime. Nous allons passer en revue chacun des points et des technologies impliquées.
 -->
 
+## Le processus doit être automatisé ?
+L'être humain est
+
+ - lent
+ - pas très fiable
+ - approximatifs
+ - doté de peu de mémoire
+
+Les ordinateurs sont
+
+ - rapides
+ - fiables
+ - precises
+ - dotés d'une excellente mémoire
+
+<!--
+Deployer manuellement est _error prone_, l'automatisation permet d'éliminer les risques
+d'oublis, d'erreur de manipulation, etc. Au prix d'un effert supplémentaire en
+planification. Un processus automatisé est auto-documenté (pour peu qu'on écrive pas ces
+script à la truelle).
+-->
+
+## Nos outils
+
+- Drush
+- Git
+- Fabric
+
 ## Drush
 ![Swiss Arny Knife](images/presentation-drush/knife.jpg)
 <!--
@@ -40,60 +68,83 @@ Drush *fonctionne* sous Windows. Parfois plus simple et plus sécuritaire de tra
 Et beaucoup beaucoup plus.
 -->
 
-## Fonctions de Drush
-- Plus de 50 commandes dans Drush core
+## Drush est exentensible
 - Plus de 100 modules qui s'intêgrent avec Drush
-![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
-<!-- 
+  ![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
+- Implementations de `hook`s pour définir ses propres commandes
+<!--
 -->
 
 ## Fonctions de Drush
-Chaque module peut définir ses propres actions drush.
+<!--
+Au final, Drush ca rassemblerait donc plutot à ca...
+-->
 ![Swiss Arny Knife](images/presentation-drush/knife2.jpg)
 
 ## Pourquoi Drush est-il important?
-Permet d'automatiser le plus de fonctions manuelle posible.
+ - Rapide
+ - Simple
+ - Complet
+ - Scriptable
+ - Automatisable
 <!--
-On veut éviter le plus possible les intéractions humaines dans le processsus.
-Vider la cache, par exemple, est souvent un problème facile à régler avec Drush.
--->
-## Pourquoi l'automatisation est-elle importante?
-L'erreur est humaine.
-
-Enlevons le facteur humain.
-
-## Pourquoi Drush est-il important?
-C'est peut-être un développeur junior, ou avec moi d'expérience avec Drupal qui va devoir pousser le code en ligne.
-## Pourquoi Drush est-il important?
-Tous les sysadmins sont malades.
-
-![Oktoberfest](images/presentation-drush/oktoberfest.gif)
-## Pourquoi Drush est-il important?
-Entendu chez un client : "En toute franchise, la documentation de projet, c'est pas notre force."
-<!--
-Drush et le processus complet, permet une sorte de documentation obligatoire implicite.
+ Rapide => Une action qui prendrait plusieurs clicks/page loads se fait en une seule étape
+ Simple => Les commandes sont généralement simples et effectue une seule action
+ Complet => Il couvre la plupart des besoins (et est facilement extensible)
+ Scriptable => Facile a exploiter depuis n'importe quel language de script orienté execution de commande
 -->
 
 ## Comment installer Drush
 
-Pear
------
+### Pear
     pear channel-discover pear.drush.org
     pear install drush/drush
 
-_Pear est brisé_ sur MacOSX Mountain Lion
+### Pear Windows Installer
+
+http://www.drush.org/drush_windows_installer
+
+### Gestionnaire de packages
+
+   sudo aptitude install drush
+
+## Comment installer Drush (Pear)
+Pear est la solution la plus simple pour avoir rapidement accès à la dernière
+version.
+
+Mais Pear _est brisé_ sur MacOSX Mountain Lion
 
     sudo cp /private/etc/php.ini.default /private/etc/php.ini
     sudo php /usr/lib/php/install-pear-nozlib.phar
     pear config-set php\_ini /private/etc/php.ini
-    pecl config-set php\_ini /private/etc/php.ini  
+    pecl config-set php\_ini /private/etc/php.ini
     sudo pear upgrade-all
 
-### Permet de mettre à jour facilement.
-Les caneaux officiels sont toujours en retard sur le développement.
+## Usage
 
+    $  drush --root=/path/to/drupal --uri=dev.mydrupalsite.com status
+     Drupal version         :  7.15
+     Site URI               :  http://dev.mydrupalsite.com/
+     Database driver        :  mysql
+     Database hostname      :  localhost
+     Database username      :  drupal
+     Database name          :  drupal
+     Default theme          :  garland
+     Administration theme   :  seven
+     PHP configuration      :  /etc/php-cli.ini
+     Drush version          :  5.7
+     Drush configuration    :  /home/fry/.drush/drushrc.php
+     Drush alias files      :  /home/fry/.drush/aliases.drush.rc
+     Drupal root            :  /path/to/drupal
+     Site path              :  sites/default
+     File directory path    :  sites/default/files
+   $
 
-## Drush aliases
+## Configuration de Drush
+
+### `drushrc.php`
+
+### `aliases.drushrc.php`
 
     $aliases['dev'] = array(
         'root' => '/path/to/drupal',
@@ -102,102 +153,109 @@ Les caneaux officiels sont toujours en retard sur le développement.
     $aliases['live'] = array(
         'root' => '/other/path/to/drupal',
         'uri' => 'mydrupalsite.com',
+        'remote-host' => 'myprodserver.myisp.com',
+        'remote-user' => 'publisher',
     );
+<!-- -->
+
+    drush @dev status
+
+<!-- On ne s'étale pas, simple réference aux alias qui sont utile pour automatiser. -->
 
 ## Fonctions importantes
-- sql-dump (drush @dev sql-dump > backup.sql)
-- sql-connect (drush @live sql-connect)
-- cache-clear all
-<!---->
+- `drush @dev sql-dump > backup.sql`
+- `drush sql-sync @prod @dev`
+- `drush rsync @dev @stage`
+- `drush rsync ./ @stage:%files/img`
+- `drush @dev clear-cache all`
+- `drush @dev updatedb`
+- `drush make mydrupalsite.make`
 
-## Drush make
-Compile en cascade un projet.
-
-Télécharge tous les modules et les patchs spécifiées.
-
-<!---->
-
-## Drush make example
-
-<https://github.com/Wiredcraft/example>
-
-    core = "7.x"
-    api = "2"
-    ; Includes ====================================================================
-    includes[] = "https://raw.github.com/makara/buildkit_plus_v7/master/base.make"
-    ; Modules =====================================================================
-    projects[mollom][type] = "module"
-    projects[mollom][subdir] = "contrib"
-    projects[mollom][version] = "1.1"
-
-Petit site permettant de construire un make file pour Drush, pour un nouveau projet.
-
-<http://drushmake.me>
 <!--
+Expliquer brievement chaque commande et son usage dans le cadre d'un déploiement.
 Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire.
 -->
 
-## Git?
-C'est comme SVN, mais complêtement différend.
-![Koala](images/presentation-drush/koala.jpg)
+
 
 ## Git
-Git :
-<http://git-scm.com/>
 
-Beau tutoriel fait en collaboration avec CodeSchool, amusant et simple :
-<http://try.github.com/>
+![Git](images/presentation-drush/git.jpg)
+
+## Git
+<div style="float: right"><img src="images/presentation-drush/druplicon-git.png" /></div>
+
+ - Git est un logiciel de gestion de versions décentralisé.
+ - Permet de maintenir l'historique du versions de code.
+ - Support de nombreux _workflow_ d'édition et de partage de code.
+ - Utilisé sur Drupal.org, requis pour contribué
+
+ - <http://git-scm.com/>
+ - <http://try.github.com/>
+ - <http://drupal.org/documentation/git>
+
 
 ## Branches
-Git permet d'utiliser différentes branches, tout comme SVN. 
 
-Dans notre schema, chaque branche correspond à un serveur.
+![Git](images/presentation-drush/branches.png)
 
-Branche master = serveur dev
 
-Branche stage = serveur de stage
+## Deployer le code avec Git
 
-Branche prod = serveur de production
+Le déploiement se fait par mise à jour d'une dépot Git _local_ au serveur sur lequel on déploie.
 
-## Pull
-L'équivalent de `svn up`, permet d'aller chercher les derniers changements sur notre repos.
+### Pull
 
-## Remotes
-Un remote, en terme Git, correspond à une destination distante. Dans notre cas, on parle de nos serveurs Dev, Stage et Prod. 
+Récupérer les derniers changements dans un dépôt de code central depuis le serveur sur lequel on déploie.
 
-Seul le serveur ayant Gitolite aura les remotes Dev, Stage et Prod configurés.
+### Push
 
-Git/Gitolite passe par SSH pour transferer les fichiers. Donc le machine de deploiement devra avoir sa clef SSH enregistrée sur les serveurs distants pour pousser les fichiers automatiquement (sans user input).
+Envoyer les derniers changements dans un dépot local vers le serveur sur lequel on déploie.
 
-## Push
-Action qui permet de pousser le code sur un remote.
-
-<!--
-Une belle fonctionnalité que l'on ne retrouve pas sur svn, Git permet d'envoyer le code sur un serveur (remote) distant.
--->
 
 ## Gitolite/Gitosis
+
+Permet de facilement gérer un serveur de dépôts de code _centralisés_ avec un contrôle d'accès par utilisateurs et groupes d'utilisateurs.
+
 Gitosis est mort, longue vie à Gitosis!
 
 Dernier commit est en 2009.
 Gitolite est complet et fonctionne bien.
 
-- Permet d'assigner des permissions à des utilisateurs/groupes 
-
-Le truc : centraliser un système de versionnage décentralisé afin de faire les déploiements.
-
-## Fabric?
-Petite librairie python permettant d'automatiser des tâches sur un ou des serveurs distants.
-
-![Python logo](images/presentation-drush/python.png)
+<!-- Le truc : centraliser un système de versionnage décentralisé afin de faire les déploiements. -->
 
 ## Fabric
+<div style="float: right"><img src="images/presentation-drush/python.png" /></div>
+
+Librairie Python permettant d'automatiser des tâches sur un ou des serveurs distants.
+
+    from fabric.api import run
+
+    def host_type()
+       run('uname -s')
+
+<!-- -->
+
+    $ fab -H localhost,linuxbox host_type
+    [localhost] run: uname -s
+    [localhost] out: Darwin
+    [linuxbox] run: uname -s
+    [linuxbox] out: Linux
+
+    Done.
+    Disconnecting from localhost... done.
+    Disconnecting from linuxbox... done.
+
+
+
+<!--
+
 Peut facilement être remplacé par Jenkins.
 Elle sert dans notre processus à déployer les bases de données entre chacun des serveurs.
 
 Habituellement les développeurs vont avoir accès pour pousser les bases de données sur les serveurs de Dev et Stage.
 Seulement le sysadmin ou la machine de déploiement a les droits pour pousser sur la machine de production.
-<!--
+
 Un truc important, le processus ne gère pas le "content staging". Node export peut aider le content staging, mais c'est loin d'être une solution fiable. Le projet Migrate fait beaucoup, mais cest long et compliqué quand ca marche pas.
 -->
 
