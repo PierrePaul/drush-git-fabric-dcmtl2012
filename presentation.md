@@ -2,6 +2,8 @@
 
 ## Intro
 ![Armageddon movie](images/presentation-drush/armageddon.jpg)
+<https://github.com/PierrePaul/drush-git-fabric-dcmtl2012>
+
 <!--
 Tous ceux qui ont eu à faire des déploiements se sentent un peu comme les héros du film Armageddon.
 Here to save the day! et par la même occasion, de mettre les pieds sur un terrain encore peu explorer, mais énormement étudier.
@@ -14,6 +16,7 @@ Vers la fin de la session, nous allons aussi vous présentez des pistes pour aju
 
 ## But ultime
 ![Intro](images/presentation-drush/processus-intro.png)
+
 <!--
 Voici notre but ultime. Nous allons passer en revue chacun des points et des technologies impliquées.
 -->
@@ -72,13 +75,8 @@ Et beaucoup beaucoup plus.
 - Plus de 100 modules qui s'intêgrent avec Drush
   ![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
 - Implementations de `hook`s pour définir ses propres commandes
-<!--
--->
 
 ## Fonctions de Drush
-<!--
-Au final, Drush ca rassemblerait donc plutot à ca...
--->
 ![Swiss Arny Knife](images/presentation-drush/knife2.jpg)
 
 ## Pourquoi Drush est-il important?
@@ -100,13 +98,13 @@ Au final, Drush ca rassemblerait donc plutot à ca...
     pear channel-discover pear.drush.org
     pear install drush/drush
 
-### Pear Windows Installer
+### Windows Installer
 
 http://www.drush.org/drush_windows_installer
 
 ### Gestionnaire de packages
 
-   sudo aptitude install drush
+   `sudo aptitude install drush`
 
 ## Comment installer Drush (Pear)
 Pear est la solution la plus simple pour avoir rapidement accès à la dernière
@@ -116,13 +114,13 @@ Mais Pear _est brisé_ sur MacOSX Mountain Lion
 
     sudo cp /private/etc/php.ini.default /private/etc/php.ini
     sudo php /usr/lib/php/install-pear-nozlib.phar
-    pear config-set php\_ini /private/etc/php.ini
-    pecl config-set php\_ini /private/etc/php.ini
+    pear config-set php_ini /private/etc/php.ini
+    pecl config-set php_ini /private/etc/php.ini
     sudo pear upgrade-all
 
 ## Usage
 
-    $  drush --root=/path/to/drupal --uri=dev.mydrupalsite.com status
+     drush --root=/path/to/drupal --uri=dev.mydrupalsite.com status
      Drupal version         :  7.15
      Site URI               :  http://dev.mydrupalsite.com/
      Database driver        :  mysql
@@ -138,7 +136,6 @@ Mais Pear _est brisé_ sur MacOSX Mountain Lion
      Drupal root            :  /path/to/drupal
      Site path              :  sites/default
      File directory path    :  sites/default/files
-   $
 
 ## Configuration de Drush
 
@@ -183,16 +180,16 @@ Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire
 ![Git](images/presentation-drush/git.jpg)
 
 ## Git
-<div style="float: right"><img src="images/presentation-drush/druplicon-git.png" /></div>
+![Drupalicon](images/presentation-drush/druplicon-git.png)
 
- - Git est un logiciel de gestion de versions décentralisé.
- - Permet de maintenir l'historique du versions de code.
- - Support de nombreux _workflow_ d'édition et de partage de code.
- - Utilisé sur Drupal.org, requis pour contribué
+- Git est un logiciel de gestion de versions décentralisé.
+- Permet de maintenir l'historique du versions de code.
+- Support de nombreux _workflow_ d'édition et de partage de code.
+- Utilisé sur Drupal.org, requis pour contribué
 
- - <http://git-scm.com/>
- - <http://try.github.com/>
- - <http://drupal.org/documentation/git>
+- <http://git-scm.com/>
+- <http://try.github.com/>
+- <http://drupal.org/documentation/git>
 
 
 ## Branches
@@ -225,7 +222,7 @@ Gitolite est complet et fonctionne bien.
 <!-- Le truc : centraliser un système de versionnage décentralisé afin de faire les déploiements. -->
 
 ## Fabric
-<div style="float: right"><img src="images/presentation-drush/python.png" /></div>
+![Python](images/presentation-drush/python.png)
 
 Librairie Python permettant d'automatiser des tâches sur un ou des serveurs distants.
 
@@ -233,8 +230,6 @@ Librairie Python permettant d'automatiser des tâches sur un ou des serveurs dis
 
     def host_type()
        run('uname -s')
-
-<!-- -->
 
     $ fab -H localhost,linuxbox host_type
     [localhost] run: uname -s
@@ -246,18 +241,6 @@ Librairie Python permettant d'automatiser des tâches sur un ou des serveurs dis
     Disconnecting from localhost... done.
     Disconnecting from linuxbox... done.
 
-
-
-<!--
-
-Peut facilement être remplacé par Jenkins.
-Elle sert dans notre processus à déployer les bases de données entre chacun des serveurs.
-
-Habituellement les développeurs vont avoir accès pour pousser les bases de données sur les serveurs de Dev et Stage.
-Seulement le sysadmin ou la machine de déploiement a les droits pour pousser sur la machine de production.
-
-Un truc important, le processus ne gère pas le "content staging". Node export peut aider le content staging, mais c'est loin d'être une solution fiable. Le projet Migrate fait beaucoup, mais cest long et compliqué quand ca marche pas.
--->
 
 ## Exemple Fabric
 Exemple de script pour pousser la DB sur un serveur distant
@@ -297,8 +280,15 @@ C'est long rouler les tests.
 
 Il peut aussi être utiliser pour vérifier que les Coding Standards ont bien été suivis entre chacune des versions du site web.
 
-
 ## Ansible - Chef
+Ansible
+---
+Belle solution python, probablement la plus simple.
+
+<http://ansible.cc/>
+
+Le nouveau site web est beaucoup plus accessible et convivial.
+
 <!--
 D'autres solutions sont disponibles par contre pour aider à maintenir l'ajout de nouveau serveurs/sites.
 Des solutions qui sont disponibles aux sysadmins qui permettent de gérer les configurations sur leur serveurs, mais qui peuvent aussi servir
@@ -309,13 +299,6 @@ Des solutions qui sont disponibles aux sysadmins qui permettent de gérer les co
 - s'assurer que Drush soit installé et à jour sur les serveurs, etc.
 - authoriser automatiquement la clef SSH du user de deploy
 -->
-Ansible
----
-Belle solution python, probablement la plus simple.
-
-<http://ansible.cc/>
-
-Le nouveau site web est beaucoup plus accessible et convivial.
 
 Chef
 ----
