@@ -71,7 +71,7 @@ Voici notre but ultime. Nous allons passer en revue chacun des points et des tec
 <ul>
 <li>rapides</li>
 <li>fiables</li>
-<li>precises</li>
+<li>précis</li>
 <li>dotés d'une excellente mémoire</li>
 </ul>
 <!--
@@ -111,7 +111,7 @@ Et beaucoup beaucoup plus.
 </ul>
 </div><div class="slide" id="8"><h2>Drush est exentensible</h2>
 <ul>
-<li>Plus de 100 modules qui s'intêgrent avec Drush
+<li>Plus de 100 modules qui s'intègrent avec Drush
   <img alt="Swiss Arny Knife" src="images/presentation-drush/drush-modules.jpg" /></li>
 <li>Implementations de <code>hook</code>s pour définir ses propres commandes</li>
 </ul>
@@ -209,10 +209,10 @@ Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire
 <p><img alt="Drupalicon" src="images/presentation-drush/druplicon-git.png" /></p>
 <ul>
 <li>Git est un logiciel de gestion de versions décentralisé.</li>
-<li>Permet de maintenir l'historique du versions de code.</li>
+<li>Permet de maintenir l'histoire des versions de code.</li>
 <li>Support de nombreux <em>workflow</em> d'édition et de partage de code.</li>
 <li>
-<p>Utilisé sur Drupal.org, requis pour contribué</p>
+<p>Utilisé sur Drupal.org, requis pour contribuer</p>
 </li>
 <li>
 <p><a href="http://git-scm.com/">http://git-scm.com/</a></p>
@@ -223,9 +223,9 @@ Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire
 </div><div class="slide" id="18"><h2>Branches</h2>
 <p><img alt="Git" src="images/presentation-drush/branches.png" /></p>
 </div><div class="slide" id="19"><h2>Deployer le code avec Git</h2>
-<p>Le déploiement se fait par mise à jour d'une dépot Git <em>local</em> au serveur sur lequel on déploie.</p>
+<p>Le déploiement se fait par mise à jour d'un dépôt Git <em>local</em> au serveur sur lequel on déploie.</p>
 <h3>Pull</h3>
-<p>Récupérer les derniers changements dans un dépôt de code central depuis le serveur sur lequel on déploie.</p>
+<p>Récupérer les derniers changements dans un dépôt central depuis le serveur sur lequel on déploie.</p>
 <h3>Push</h3>
 <p>Envoyer les derniers changements dans un dépot local vers le serveur sur lequel on déploie.</p>
 </div><div class="slide" id="20"><h2>Gitolite/Gitosis</h2>
@@ -271,12 +271,12 @@ C'est une mauvaise supposition, mais c'est important pour garder l'exemple le pl
 -->
 
 </div><div class="slide" id="23"><h2>Config SSH</h2>
-<p>Les dernieres versions peuvent lire dans la config SSH du client initiant les commandes.</p>
+<p>Les dernières versions peuvent lire dans la config SSH du client initiant les commandes.</p>
 <pre><code>Host        supersite.stage
 HostName    10.111.222.333 
 User        deployuser
 </code></pre>
-<p>Avec ce snippet dans votre configuration, vous pouvez vous connecter avec <code>ssh supersite.stage</code> sans spécifier le port, le user ou le mot de passe (si la clef SSH est authoriser).</p>
+<p>Avec ce snippet dans votre configuration, vous pouvez vous connecter avec <code>ssh supersite.stage</code> sans spécifier le port, le user ou le mot de passe (si la clef SSH est authorisée).</p>
 </div><div class="slide" id="24"><h2>Autres outils à considérer</h2>
 <p>C'est une belle technique qui reste quand même simple et flexible, mais difficile à maintenir quand le nombre de serveurs dépassent une trentaine.</p>
 </div><div class="slide" id="25"><h2>Jenkins</h2>
