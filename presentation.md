@@ -33,7 +33,7 @@ Les ordinateurs sont
 
  - rapides
  - fiables
- - precises
+ - précis
  - dotés d'une excellente mémoire
 
 <!--
@@ -72,7 +72,7 @@ Et beaucoup beaucoup plus.
 -->
 
 ## Drush est exentensible
-- Plus de 100 modules qui s'intêgrent avec Drush
+- Plus de 100 modules qui s'intègrent avec Drush
   ![Swiss Arny Knife](images/presentation-drush/drush-modules.jpg)
 - Implementations de `hook`s pour définir ses propres commandes
 
@@ -183,9 +183,9 @@ Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire
 ![Drupalicon](images/presentation-drush/druplicon-git.png)
 
 - Git est un logiciel de gestion de versions décentralisé.
-- Permet de maintenir l'historique du versions de code.
+- Permet de maintenir l'histoire des versions de code.
 - Support de nombreux _workflow_ d'édition et de partage de code.
-- Utilisé sur Drupal.org, requis pour contribué
+- Utilisé sur Drupal.org, requis pour contribuer
 
 - <http://git-scm.com/>
 - <http://try.github.com/>
@@ -199,11 +199,11 @@ Permet aussi d'installer des patches, mais publiques seulement. C'est volontaire
 
 ## Deployer le code avec Git
 
-Le déploiement se fait par mise à jour d'une dépot Git _local_ au serveur sur lequel on déploie.
+Le déploiement se fait par mise à jour d'un dépôt Git _local_ au serveur sur lequel on déploie.
 
 ### Pull
 
-Récupérer les derniers changements dans un dépôt de code central depuis le serveur sur lequel on déploie.
+Récupérer les derniers changements dans un dépôt central depuis le serveur sur lequel on déploie.
 
 ### Push
 
@@ -261,13 +261,13 @@ On suppose ici que les settings.php sont défiinis pour chacun des environnement
 C'est une mauvaise supposition, mais c'est important pour garder l'exemple le plus simple que possible.
 -->
 ## Config SSH
-Les dernieres versions peuvent lire dans la config SSH du client initiant les commandes.
+Les dernières versions peuvent lire dans la config SSH du client initiant les commandes.
 
     Host        supersite.stage
     HostName    10.111.222.333 
     User        deployuser
 
-Avec ce snippet dans votre configuration, vous pouvez vous connecter avec `ssh supersite.stage` sans spécifier le port, le user ou le mot de passe (si la clef SSH est authoriser).
+Avec ce snippet dans votre configuration, vous pouvez vous connecter avec `ssh supersite.stage` sans spécifier le port, le user ou le mot de passe (si la clef SSH est authorisée).
 
 ## Autres outils à considérer
 C'est une belle technique qui reste quand même simple et flexible, mais difficile à maintenir quand le nombre de serveurs dépassent une trentaine.
